@@ -41,7 +41,7 @@ public class CaseService {
         return Double.parseDouble((String) myStack.pop());
     }
 
-    public boolean isOperator(String op) {
+    private boolean isOperator(String op) {
         return (op.equals("+") ||
                 op.equals("*") ||
                 op.equals("/") ||
@@ -54,6 +54,8 @@ public class CaseService {
         int mapX = square.getSquare()[0].split("").length;
         int mapY = square.getSquare().length;
         String[][] hintMap = new String[mapY][mapX];
+        String[] hintResult = new String[mapY];
+        String getRow = "";
 
         for (int y = 0; y < mapY; y++) {
             for (int x = 0; x < mapX; x++) {
@@ -62,14 +64,6 @@ public class CaseService {
                 } else {
                     hintMap[y][x] = "*";
                 }
-            }
-        }
-
-        String[] hintResult = new String[mapY];
-        String getRow = "";
-
-        for (int y = 0; y < mapY; y++) {
-            for (int x = 0; x < mapX; x++) {
                 getRow += hintMap[y][x];
             }
             hintResult[y] = getRow;
@@ -81,14 +75,11 @@ public class CaseService {
         return hintsResponse;
     }
 
-    public boolean outOfBounds(int x, int y, int mapX, int mapY) {
-        if (x < 0 || x >= mapX || y < 0 || y >= mapY) {
-            return true;
-        } else
-            return false;
+    private boolean outOfBounds(int x, int y, int mapX, int mapY) {
+        return (x < 0 || x >= mapX || y < 0 || y >= mapY);
     }
 
-    public int checkAdjacent(MinesweeperRequest square, int posY, int posX, int mapX, int mapY) {
+    private int checkAdjacent(MinesweeperRequest square, int posY, int posX, int mapX, int mapY) {
         int counter = 0;
         for (int y = posY - 1; y <= posY + 1; y++) {
             for (int x = posX - 1; x <= posX + 1; x++) {
