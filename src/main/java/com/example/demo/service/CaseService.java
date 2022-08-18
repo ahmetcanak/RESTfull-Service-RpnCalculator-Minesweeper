@@ -41,10 +41,6 @@ public class CaseService {
         return Double.parseDouble((String) myStack.pop());
     }
 
-    /*public String makeOperation() {
-
-    }*/
-
     public boolean isOperator(String op) {
         return (op.equals("+") ||
                 op.equals("*") ||
@@ -57,19 +53,12 @@ public class CaseService {
 
         int mapX = square.getSquare()[0].split("").length;
         int mapY = square.getSquare().length;
-        String[][] matrixMap = new String[mapY][mapX];
         String[][] hintMap = new String[mapY][mapX];
 
         for (int y = 0; y < mapY; y++) {
             for (int x = 0; x < mapX; x++) {
-                matrixMap[y][x] = String.valueOf(square.getSquare()[y].charAt(x));
-            }
-        }
-
-        for (int y = 0; y < mapY; y++) {
-            for (int x = 0; x < mapX; x++) {
-                if (!(matrixMap[y][x].equals("*"))) {
-                    hintMap[y][x] = String.valueOf(checkAdjacent(matrixMap, y, x, mapX, mapY));
+                if (!(String.valueOf(square.getSquare()[y].charAt(x)).equals("*"))) {
+                    hintMap[y][x] = String.valueOf(checkAdjacent(square, y, x, mapX, mapY));
                 } else {
                     hintMap[y][x] = "*";
                 }
@@ -99,11 +88,11 @@ public class CaseService {
             return false;
     }
 
-    public int checkAdjacent(String[][] map, int posY, int posX, int mapX, int mapY) {
+    public int checkAdjacent(MinesweeperRequest square, int posY, int posX, int mapX, int mapY) {
         int counter = 0;
         for (int y = posY - 1; y <= posY + 1; y++) {
             for (int x = posX - 1; x <= posX + 1; x++) {
-                if (!outOfBounds(x, y, mapX, mapY) && !(x == posX && y == posY) && map[y][x].equals("*")) {
+                if (!outOfBounds(x, y, mapX, mapY) && !(x == posX && y == posY) && (String.valueOf(square.getSquare()[y].charAt(x)).equals("*"))) {
                     counter++;
                 }
             }
