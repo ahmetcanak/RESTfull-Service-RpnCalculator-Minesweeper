@@ -83,7 +83,10 @@ public class CaseService {
         int counter = 0;
         for (int y = posY - 1; y <= posY + 1; y++) {
             for (int x = posX - 1; x <= posX + 1; x++) {
-                if (!outOfBounds(x, y, mapX, mapY) && !(x == posX && y == posY) && (String.valueOf(square.getSquare()[y].charAt(x)).equals("*"))) {
+                if (
+                        !outOfBounds(x, y, mapX, mapY)  //Is selected cell out of array?
+                                && !(x == posX && y == posY)    //Is selected cell, actually the base cell?
+                                && (String.valueOf(square.getSquare()[y].charAt(x)).equals("*"))) {     //Is selected cell bomb?
                     counter++;
                 }
             }
