@@ -20,21 +20,21 @@ public class CaseService {
     private Double getLast(RpnExpressionRequest expression) {
         Stack myStack = new Stack();
 
-        String seperator[] = expression.getExpression().split(" ");
-        for (int unit = 0; unit < seperator.length; unit++) {
-            if (!isOperator(seperator[unit])) {
-                myStack.push(seperator[unit]);
+        String[] separate = expression.getExpression().split(" ");
+        for (int unit = 0; unit < separate.length; unit++) {
+            if (!isOperator(separate[unit])) {
+                myStack.push(separate[unit]);
             } else {
                 double operant1 = Double.parseDouble(String.valueOf(myStack.pop()));
                 double operant2 = Double.parseDouble(String.valueOf(myStack.pop()));
 
-                if (seperator[unit].equals("+"))
+                if (separate[unit].equals("+"))
                     myStack.push(String.valueOf(operant2 + operant1));
-                else if (seperator[unit].equals("-"))
+                else if (separate[unit].equals("-"))
                     myStack.push(String.valueOf(operant2 - operant1));
-                else if (seperator[unit].equals("*"))
+                else if (separate[unit].equals("*"))
                     myStack.push(String.valueOf(operant2 * operant1));
-                else if (seperator[unit].equals("/"))
+                else if (separate[unit].equals("/"))
                     myStack.push(String.valueOf(operant2 / operant1));
             }
         }
